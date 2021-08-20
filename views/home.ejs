@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!--Custom styles-->
+    <!-- <link rel="stylesheet" type="text/css" href="./css/styles.css"> -->
+
+    <title>myGaradge</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">myGaradge</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/addVehicle">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/getVehicle">Bookings</a>
+                </li>
+                <% if (user.admin) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addEmployee">Add Employee</a>
+                </li>
+                <% } %>
+                <% if (user.admin) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/getAllEmployee">View Employee</a>
+                </li>
+                <% } %>
+            </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+            <div class="mx-2">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Login to myGaradge</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" value="Are you sure you want to logout"> Are you sure you want to
+                                logout
+                            </label>
+                        </div>
+                        <a type="Logut" href="/logout" class="btn btn-primary">Logut</a>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://source.unsplash.com/1400x400/?nature,water" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/1400x400/?nature,bike" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/1400x400/?code,water" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="container my-4 mx-4">
+        <form action="/addVehicle" method="POST">
+            <div class="form-group">
+                <div class="label-title">
+                    <label><strong>Vehicle Number (eg.MALAA82HR4M123456)</strong></label>
+                </div>
+                <input name="vehicle_no" type="text" id="vin" name="vin" class="form-control" placeholder="Vehicle Number">
+                <span class="error vinmsg" style="color:red;display:none">Enter Valid VIN No OR Reg No</span>
+                <br>
+                <span class="error vinmsgvalid" style="color:red;display:none"></span>
+            </div>
+            
+            <div class="form-group mb-sm-0 mb-4">
+                <div class="label-title">
+                    <label> <strong>Problem</strong></label>
+                </div>
+                <textarea name="problem" type="text" id="description" class="form-control" placeholder="Description"
+                    rows="5"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <div class="label-title">
+                    <label><strong>Model</strong></label>
+                </div>
+                <select name="model" class="form-control" id="modelId">
+                    <option selected="selected" value="">Select</option>
+            
+                    <option value="Lexus">Lexus</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Tata">Tata</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Rolls Royace">Rolls Royace </option>
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Skoda">Skoda</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Volvo">Volvo</option>
+                    <option value="Acura">Acura</option>
+                    <option value="General Motors">General Motors</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="Daimler">Daimler</option>
+                </select>
+                <span class="error modelIdmsg" style="color:red;display:none">Select your Car</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="last_serviced"><strong>Last Serviced:</strong></label>
+                <input name="last_serviced" type="date" id="last_serviced" name="last_serviced">
+            </div>
+            
+            <div><button class="btn btn-primary">Submit</button></div>
+
+        </form>
+        
+
+    </div>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://source.unsplash.com/1400x400/?nature,water" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>First slide label</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/1400x400/?python,nature" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://source.unsplash.com/1400x400/?code,water" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <footer class="container my-4">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© 2020-2021 myGaradge, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
